@@ -1,6 +1,7 @@
 import { Routes, Route, NavLink } from "react-router-dom";
 import { Home } from "./Home";
 import { Landing } from "./Landing";
+import { CreateUser } from "./CreateUser";
 import React from "react";
 import { ProtectedRoute } from "./utils/ProtectedRoute";
 import { useAuth } from "./context/AuthProvider";
@@ -34,6 +35,7 @@ const App = () => {
   }
   />
       <Route path="home" element={<Home />} />
+      <Route path="createUser" element={<CreateUser />} />
       <Route path="*" element={<p>There's nothing here: 404!</p>} />
     </Routes>
   </AuthProvider>

@@ -1,4 +1,5 @@
 import { useAuth } from "./context/AuthProvider";
+import { NavLink } from "react-router-dom";
 
 export const Home = () => {
     const { value } = useAuth();
@@ -22,6 +23,10 @@ export const Home = () => {
         <button type="button" onClick={value.onLogin}>
             Sign In
         </button>
+        </div>
+
+        <div className="row">
+        <NavLink to="/createUser">Create User</NavLink>
         </div>
     </div>
     </>

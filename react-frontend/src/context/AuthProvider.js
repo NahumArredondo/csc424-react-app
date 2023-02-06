@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { fakeAuth } from "../utils/FakeAuth";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
@@ -12,16 +12,19 @@ export const AuthProvider = ({ children }) => {
     var setUsername = document.getElementById("Username").value;
     var setPassword = document.getElementById("Password").value;
 
-    if ((setUsername !== "Admin" || setPassword !== "AdminPassword")) {
-        navigate("/home");
-        alert("Invalid Login");
-    }
-
-    else {
-        const token = await fakeAuth();
-        setToken(token);
-        navigate("/landing");
-    }
+    const token = await axios.post('http://localhost:5000/account/login', {
+      username: setUsername,
+      password: setPassword
+    })
+    .then(function (response) {
+      console.log(response.data)
+      setToken(response.data);
+      navigate("/landing");
+    })
+      .catch(function (error) {
+      navigate("/home");
+      alert(error.response.data);
+    });
   };
 
   const handleLogout = () => {
